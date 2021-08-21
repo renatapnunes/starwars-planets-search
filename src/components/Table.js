@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Table() {
-  const { data } = useContext(Context);
+  const { data, filters: { filterByName } } = useContext(Context);
 
   if (!data.length) return <span>Loading...</span>;
 
@@ -12,8 +12,14 @@ function Table() {
   list.splice(list.indexOf('residents'), 1);
   const columns = list;
 
+  const handleFilter = () => {
+    let planets = [...data];
+    planets = planets.filter(({ name }) => name.includes(filterByName.name));
+    return planets;
+  };
+
   const fillLines = () => (
-    data.map((planet, index) => (
+    handleFilter().map((planet, index) => (
       <tr key={ index }>
         { columns.map((column, i) => <td key={ i }>{ planet[column] }</td>) }
       </tr>
