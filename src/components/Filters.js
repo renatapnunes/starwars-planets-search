@@ -55,52 +55,81 @@ function Filters() {
     return optionsColumn;
   };
 
+  const deleteFilter = ({ target: { value } }) => {
+    const newFiltersList = filterByNumericValues
+      .filter((filter) => filter.column !== value);
+
+    setFilters({
+      ...filters,
+      filterByNumericValues: newFiltersList,
+    });
+  };
+
   return (
-    <section>
-      <input
-        data-testid="name-filter"
-        type="text"
-        placeholder="Search"
-        value={ filterByName.name }
-        onChange={ inputChange }
-      />
-      <div>
-        <select
-          data-testid="column-filter"
-          name="column"
-          value={ selectValues.column }
-          onChange={ handleSelect }
-        >
-          { optionsFilter().map((option, index) => (
-            <option key={ index } value={ option }>{ option }</option>)) }
-        </select>
-        <select
-          data-testid="comparison-filter"
-          name="comparison"
-          value={ selectValues.comparison }
-          onChange={ handleSelect }
-        >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
+    <>
+      <section>
         <input
-          data-testid="value-filter"
-          type="number"
-          name="value"
-          value={ selectValues.value }
-          onChange={ handleSelect }
+          data-testid="name-filter"
+          type="text"
+          placeholder="Search"
+          value={ filterByName.name }
+          onChange={ inputChange }
         />
-        <button
-          data-testid="button-filter"
-          type="button"
-          disabled={ buttonStatus }
-          onClick={ applyFilter }
-        >
-          Aplicar
-        </button>
-      </div>
-    </section>
+        <div>
+          <select
+            data-testid="column-filter"
+            name="column"
+            value={ selectValues.column }
+            onChange={ handleSelect }
+          >
+            { optionsFilter().map((option, index) => (
+              <option key={ index } value={ option }>{ option }</option>)) }
+          </select>
+          <select
+            data-testid="comparison-filter"
+            name="comparison"
+            value={ selectValues.comparison }
+            onChange={ handleSelect }
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+          <input
+            data-testid="value-filter"
+            type="number"
+            name="value"
+            value={ selectValues.value }
+            onChange={ handleSelect }
+          />
+          <button
+            data-testid="button-filter"
+            type="button"
+            disabled={ buttonStatus }
+            onClick={ applyFilter }
+          >
+            Aplicar
+          </button>
+        </div>
+      </section>
+      <section>
+        { filterByNumericValues.map((filter, index) => (
+          <span
+            data-testid="filter"
+            key={ index }
+          >
+            { `${filter.column} | ${filter.comparison} | ${filter.value}` }
+            <button
+              type="button"
+              value={ filter.column }
+              onClick={ deleteFilter }
+            >
+              X
+            </button>
+          </span>
+        )) }
+      </section>
+    </>
   );
 }
 
