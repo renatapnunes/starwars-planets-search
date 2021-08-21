@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Table() {
-  const { data, filters: { filterByName } } = useContext(Context);
+  const { data, filters: { filterByName, filterByNumericValues } } = useContext(Context);
 
   if (!data.length) return <span>Loading...</span>;
 
@@ -14,7 +14,25 @@ function Table() {
 
   const handleFilter = () => {
     let planets = [...data];
-    planets = planets.filter(({ name }) => name.includes(filterByName.name));
+
+    if (filterByName.name) {
+      planets = planets.filter(({ name }) => name.includes(filterByName.name));
+    }
+
+    if (filterByNumericValues.length) {
+      // A ideia do "comparator" foi dada pelo colega de turma Bruno Yamamoto:
+      const comparator = {
+        'maior que': (a, b) => a > b,
+        'menor que': (a, b) => a < b,
+        'igual a': (a, b) => a === b,
+      };
+
+      filterByNumericValues.forEach(({ column, comparison, value }) => {
+        planets = planets
+          .filter((planet) => comparator[comparison](+planet[column], +value));
+      });
+    }
+
     return planets;
   };
 
