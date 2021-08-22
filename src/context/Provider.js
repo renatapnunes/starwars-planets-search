@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [filters, setFilters] = useState({
     filterByName: { name: '' },
     filterByNumericValues: [],
+    order: { column: 'name', sort: 'ASC' },
   });
 
   useEffect(() => {

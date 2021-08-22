@@ -8,10 +8,33 @@ function Filters() {
     value: '',
   };
 
-  const { filters, setFilters } = useContext(Context);
+  const defaultSort = {
+    column: 'name', sort: 'ASC',
+  };
+
+  const { data, filters, setFilters } = useContext(Context);
   const { filterByName, filterByNumericValues } = filters;
   const [selectValues, setSelectValues] = useState(defaultValues);
   const [buttonStatus, setButtonStatus] = useState(true);
+  const [orderValues, setOrderValues] = useState(defaultSort);
+
+  let columns = [];
+  if (data.length) {
+    const list = Object.keys(data[0]);
+    list.splice(list.indexOf('residents'), 1);
+    columns = list;
+  }
+
+  const handleSort = ({ target: { name, value } }) => {
+    setOrderValues({ ...orderValues, [name]: value });
+  };
+
+  const applySort = () => {
+    setFilters({
+      ...filters,
+      order: { ...orderValues },
+    });
+  };
 
   useEffect(() => {
     const { column, value } = selectValues;
@@ -65,6 +88,45 @@ function Filters() {
     });
   };
 
+  const inputFilters = () => (
+    <div>
+      <select
+        data-testid="column-filter"
+        name="column"
+        value={ selectValues.column }
+        onChange={ handleSelect }
+      >
+        { optionsFilter().map((option, index) => (
+          <option key={ index } value={ option }>{ option }</option>)) }
+      </select>
+      <select
+        data-testid="comparison-filter"
+        name="comparison"
+        value={ selectValues.comparison }
+        onChange={ handleSelect }
+      >
+        <option value="maior que">maior que</option>
+        <option value="menor que">menor que</option>
+        <option value="igual a">igual a</option>
+      </select>
+      <input
+        data-testid="value-filter"
+        type="number"
+        name="value"
+        value={ selectValues.value }
+        onChange={ handleSelect }
+      />
+      <button
+        data-testid="button-filter"
+        type="button"
+        disabled={ buttonStatus }
+        onClick={ applyFilter }
+      >
+        Aplicar
+      </button>
+    </div>
+  );
+
   return (
     <>
       <section>
@@ -75,38 +137,44 @@ function Filters() {
           value={ filterByName.name }
           onChange={ inputChange }
         />
+        { inputFilters() }
         <div>
           <select
-            data-testid="column-filter"
+            data-testid="column-sort"
             name="column"
-            value={ selectValues.column }
-            onChange={ handleSelect }
+            onChange={ handleSort }
           >
-            { optionsFilter().map((option, index) => (
-              <option key={ index } value={ option }>{ option }</option>)) }
+            { columns.map((column, index) => (
+              <option key={ index } value={ column }>{ column }</option>)) }
           </select>
-          <select
-            data-testid="comparison-filter"
-            name="comparison"
-            value={ selectValues.comparison }
-            onChange={ handleSelect }
-          >
-            <option value="maior que">maior que</option>
-            <option value="menor que">menor que</option>
-            <option value="igual a">igual a</option>
-          </select>
-          <input
-            data-testid="value-filter"
-            type="number"
-            name="value"
-            value={ selectValues.value }
-            onChange={ handleSelect }
-          />
+          <label htmlFor="sort-asc">
+            <input
+              data-testid="column-sort-input-asc"
+              type="radio"
+              id="sort-asc"
+              name="sort"
+              value="ASC"
+              checked={ orderValues.sort === 'ASC' }
+              onChange={ handleSort }
+            />
+            ASC
+          </label>
+          <label htmlFor="sort-desc">
+            <input
+              data-testid="column-sort-input-desc"
+              type="radio"
+              id="sort-desc"
+              name="sort"
+              value="DESC"
+              checked={ orderValues.sort === 'DESC' }
+              onChange={ handleSort }
+            />
+            DESC
+          </label>
           <button
-            data-testid="button-filter"
+            data-testid="column-sort-button"
             type="button"
-            disabled={ buttonStatus }
-            onClick={ applyFilter }
+            onClick={ applySort }
           >
             Aplicar
           </button>
