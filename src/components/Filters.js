@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
+import '../styles/filters.css';
 
 function Filters() {
   const defaultValues = {
@@ -111,6 +112,7 @@ function Filters() {
       </select>
       <input
         data-testid="value-filter"
+        className="input-number"
         type="number"
         name="value"
         value={ selectValues.value }
@@ -133,7 +135,7 @@ function Filters() {
         <input
           data-testid="name-filter"
           type="text"
-          placeholder="Search"
+          placeholder="Name search"
           value={ filterByName.name }
           onChange={ inputChange }
         />
@@ -147,7 +149,7 @@ function Filters() {
             { columns.map((column, index) => (
               <option key={ index } value={ column }>{ column }</option>)) }
           </select>
-          <label htmlFor="sort-asc">
+          <label htmlFor="sort-asc" className="radio-sort">
             <input
               data-testid="column-sort-input-asc"
               type="radio"
@@ -159,7 +161,7 @@ function Filters() {
             />
             ASC
           </label>
-          <label htmlFor="sort-desc">
+          <label htmlFor="sort-desc" className="radio-sort">
             <input
               data-testid="column-sort-input-desc"
               type="radio"
@@ -180,14 +182,18 @@ function Filters() {
           </button>
         </div>
       </section>
-      <section>
+      <section className="filters-add">
+        { filterByNumericValues.length >= 1
+          && <span className="filter-title">Filtros aplicados:</span> }
         { filterByNumericValues.map((filter, index) => (
           <span
             data-testid="filter"
+            className="filter-add"
             key={ index }
           >
             { `${filter.column} | ${filter.comparison} | ${filter.value}` }
             <button
+              className="button-x"
               type="button"
               value={ filter.column }
               onClick={ deleteFilter }
