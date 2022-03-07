@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
 import useFilter from '../hooks/useFilter';
+// import Alderaan from '../images/planets/alderaan.png';
+import planetsCard from '../services/planetsCard';
 import '../styles/table.css';
 
 function Table() {
@@ -15,6 +17,17 @@ function Table() {
   list.splice(list.indexOf('residents'), 1);
   const columns = list;
 
+  const showCard = ({ target }) => {
+    console.log();
+    const image = target.children[0];
+    image.style.display = 'flex';
+  };
+
+  const hideCard = ({ target }) => {
+    const image = target.children[0];
+    image.style.display = 'none';
+  };
+
   const fillLines = () => (
     handleFilter().map((planet, index) => (
       <tr key={ index } className="table-line">
@@ -25,8 +38,17 @@ function Table() {
               data-testid="planet-name"
               className="planet-name"
               key={ i }
+              onFocus={ showCard }
+              onMouseOver={ showCard }
+              onMouseLeave={ hideCard }
             >
               { planet[column] }
+              <img
+                className="planet-img"
+                id={ planet[column] }
+                src={ planetsCard[planet[column]] }
+                alt={ planet[column] }
+              />
             </td>);
         }) }
       </tr>

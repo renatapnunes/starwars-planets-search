@@ -24,7 +24,22 @@
 }
 
 .planet-name {
+  cursor: pointer;
   font-family: Teko , sans-serif;
   font-weight: 500;
   letter-spacing: 0.063rem;
+}
+
+.planet-img {
+  border: 2px solid #d9d9d9;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 2px #6e6e6e;
+  display: none;
+  left: 50%;
+  height: 300px;
+  margin-left: -125px;
+  margin-top: -150px;
+  position: absolute;
+  top: 50%;
+  width: 250px;
 }
