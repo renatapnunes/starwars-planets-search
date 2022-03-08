@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
 import useFilter from '../hooks/useFilter';
-// import Alderaan from '../images/planets/alderaan.png';
 import planetsCard from '../services/planetsCard';
 import '../styles/table.css';
 
