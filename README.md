@@ -4,6 +4,8 @@
 
 _Projeto proposto no curso de Desenvolvimento Web da_ [_Trybe_](https://www.betrybe.com/)
 
+Acesse: [_Star Wars Planets Search_](https://starwars-planets-search.vercel.app/)
+
 ## Contexto
 O universo Star Wars possuí alguns planetas que neste projeto são listados em uma tabela, juntamente com algumas de suas características, como por exemplo, seu diâmetro, população e clima. O usuário, através de um formulário disponível, pode fazer a busca de um planeta pelo nome, filtra-los de acordo com as características desejadas e/ou ordenar os resultados de forma ascendente ou descendente.
 
