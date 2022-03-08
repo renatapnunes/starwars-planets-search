@@ -23,6 +23,15 @@ Caso a aplicação não inicie sozinha, acesse no seu browser `http://localhost:
 
 ## Aplicação
 
+_Aplicação completa:_
+![Aplicação completa](https://github.com/renatapnunes/starwars-planets-search/blob/main/images-readme/StarWarsPlanets.png)
+
+_Destaque para a parte dos filtros:_
+![Filtros da aplicação](https://github.com/renatapnunes/starwars-planets-search/blob/main/images-readme/StarWarsPlanets_Filtros.png)
+
+_Gif da aplicação funcionando:_
+![Aplicação funcionando](https://github.com/renatapnunes/starwars-planets-search/blob/main/images-readme/StarWarsPlanets.gif)
+
 Na parte superior da página, encontra-se o formulário onde é possível:
 
  - Fazer uma busca pelo nome do planeta ou parte dele;
@@ -30,21 +39,27 @@ Na parte superior da página, encontra-se o formulário onde é possível:
  - Ordenar os    resultados em ordem ascendente ou descendente;
 
 É possível ainda combinar todas essas opções e aplicar quantos filtros desejar.
+
 Após um filtro ser aplicado, ele pode ser excluído sempre que desejado.
 
 Ao passar o mouse sobre o nome de cada planeta na tabela, um card exibindo sua imagem e uma breve descrição aparece na tela.
 
 ## Tecnologias
 
-Este projeto foi desenvolvido com ***React.js***, juntamente com o uso de ***Contect API*** e ***Hooks***.
+Este projeto foi desenvolvido com ***React.js***, juntamente com o uso de ***Context API*** e ***Hooks***.
+
 Para estiliza-lo, foi usado ***CSS 3*** e para garantir um código limpo, foi usado o ***ESLint***.
 
+
 A aplicação consome dados da seguinte Api REST:  [_Planets_](https://swapi-trybe.herokuapp.com/api/planets/)
+
 A URL usada para fazer a requisição foi: https://swapi-trybe.herokuapp.com/api/planets/
 
 ## Meus contatos
 Estou aberta a feedbacks sobre este projeto.
+
 Caso queria colaborar, fique a vontade para entrar em contato pelo meu:
+
 👉 [Linkedin](https://www.linkedin.com/in/renata-p-nunes/)
 
 Vou ficar muito feliz em aprender algo novo! 😄
